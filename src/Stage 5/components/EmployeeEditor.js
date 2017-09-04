@@ -8,22 +8,40 @@ class EmployeeEditor extends Component {
       originalEmployee: null,
       notModified: true
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    // this.save = this.save.bind(this);
+    // this.cancel = this.canel.bind(this);
   }
 
-  // componentWillReceiveProps
+  componentWillReceiveProps (props) {
+    this.setState({employee: props.selected, originalEmployee: props.selected});
+  }
 
-  // handleChange
+  handleChange (prop, val) {
+    if (this.state.notModified) {
+      this.setState({notModified: false});
+    }
 
-  // save
+    let copyEmployee = this.state.employee;
+    copyEmployee[prop] = val;
+    this.setState({employee: copyEmployee});
+  }
 
-  // cancel
-  
+  save () {
+
+  }
+
+  cancel () {
+
+  }
+
   render() {
     return (
       <div className="infoCard">
-        { 
+        {
           this.state.employee
-          ? 
+          ?
           <div>
             <span id="employeeID"> ID: { this.state.employee.id } </span>
             <p id="employeeTitle"> { this.state.originalEmployee.name } </p>
@@ -41,7 +59,7 @@ class EmployeeEditor extends Component {
           :
           <p id="noEmployee"> No Employee Selected </p>
         }
-       
+
       </div>
     )
   }
